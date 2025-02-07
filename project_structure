@@ -1,0 +1,22 @@
+ai_agent_project/
+├── .env
+├── .gitignore
+├── README.md
+├── requirements.txt
+├── src/
+│   ├── __init__.py
+│   ├── agents/
+│   │   ├── __init__.py
+│   │   └── base_agent.py
+│   ├── graphs/
+│   │   ├── __init__.py
+│   │   └── workflow.py
+│   ├── tools/
+│   │   ├── __init__.py
+│   │   └── basic_tools.py
+│   └── config/
+│       ├── __init__.py
+│       └── settings.py
+└── tests/
+    ├── __init__.py
+    └── test_workflow.py 

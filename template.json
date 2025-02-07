@@ -1,0 +1,331 @@
+{
+	"nodes": [{
+		"data": {
+			"nodeMeta": {
+				"description": "工作流的起始节点，用于设定启动工作流需要的信息",
+				"icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Start-v2.jpg",
+				"subTitle": "",
+				"title": "开始"
+			},
+			"outputs": [{
+				"name": "question",
+				"required": true,
+				"type": "string"
+			}],
+			"trigger_parameters": [{
+				"name": "question",
+				"required": true,
+				"type": "string"
+			}]
+		},
+		"id": "100001",
+		"meta": {
+			"position": {
+				"x": -5.0622048232387264,
+				"y": -268.91942046855735
+			}
+		},
+		"type": "1"
+	}, {
+		"data": {
+			"nodeMeta": {
+				"description": "从知识库中检索相关内容",
+				"icon": "https://example.com/kb-icon.jpg",
+				"subTitle": "知识库",
+				"title": "知识库检索",
+				"mainColor": "#FF9900"
+			},
+			"inputs": {
+				"inputParameters": [{
+					"input": {
+						"type": "string",
+						"value": {
+							"content": {
+								"blockID": "100001",
+								"name": "question",
+								"source": "block-output"
+							},
+							"type": "ref"
+						}
+					},
+					"name": "query"
+				}],
+				"settingOnError": {}
+			},
+			"outputs": [{
+				"name": "context",
+				"type": "string"
+			}],
+			"version": "1"
+		},
+		"id": "163634",
+		"meta": {
+			"position": {
+				"x": 300,
+				"y": -200
+			}
+		},
+		"type": "4"
+	}, {
+		"data": {
+			"inputs": {
+				"inputParameters": [{
+					"input": {
+						"type": "string",
+						"value": {
+							"content": {
+								"blockID": "100001",
+								"name": "question",
+								"source": "block-output"
+							},
+							"type": "ref"
+						}
+					},
+					"name": "question"
+				}, {
+					"input": {
+						"type": "string",
+						"value": {
+							"content": {
+								"blockID": "163634",
+								"name": "context",
+								"source": "block-output"
+							},
+							"type": "ref"
+						}
+					},
+					"name": "context"
+				}],
+				"llmParam": [{
+					"input": {
+						"type": "integer",
+						"value": {
+							"content": "1706077826",
+							"type": "literal"
+						}
+					},
+					"name": "modelType"
+				}, {
+					"input": {
+						"type": "string",
+						"value": {
+							"content": "豆包·工具调用",
+							"type": "literal"
+						}
+					},
+					"name": "modleName"
+				}, {
+					"input": {
+						"type": "string",
+						"value": {
+							"content": "balance",
+							"type": "literal"
+						}
+					},
+					"name": "generationDiversity"
+				}, {
+					"input": {
+						"type": "float",
+						"value": {
+							"content": "1",
+							"type": "literal"
+						}
+					},
+					"name": "temperature"
+				}, {
+					"input": {
+						"type": "float",
+						"value": {
+							"content": "0.7",
+							"type": "literal"
+						}
+					},
+					"name": "topP"
+				}, {
+					"input": {
+						"type": "integer",
+						"value": {
+							"content": "2",
+							"type": "literal"
+						}
+					},
+					"name": "responseFormat"
+				}, {
+					"input": {
+						"type": "integer",
+						"value": {
+							"content": "1024",
+							"type": "literal"
+						}
+					},
+					"name": "maxTokens"
+				}, {
+					"input": {
+						"type": "string",
+						"value": {
+							"content": "",
+							"type": "literal"
+						}
+					},
+					"name": "prompt"
+				}, {
+					"input": {
+						"type": "boolean",
+						"value": {
+							"content": false,
+							"type": "literal"
+						}
+					},
+					"name": "enableChatHistory"
+				}, {
+					"input": {
+						"type": "integer",
+						"value": {
+							"content": "3",
+							"type": "literal"
+						}
+					},
+					"name": "chatHistoryRound"
+				}, {
+					"input": {
+						"type": "string",
+						"value": {
+							"content": "",
+							"type": "literal"
+						}
+					},
+					"name": "systemPrompt"
+				}],
+				"settingOnError": {}
+			},
+			"nodeMeta": {
+				"description": "调用大语言模型,使用变量和提示词生成回复",
+				"icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-LLM-v2.jpg",
+				"mainColor": "#5C62FF",
+				"subTitle": "大模型",
+				"title": "大模型"
+			},
+			"outputs": [{
+				"name": "output",
+				"type": "string"
+			}],
+			"version": "3"
+		},
+		"id": "180379",
+		"meta": {
+			"position": {
+				"x": 643.4008038127196,
+				"y": -198.51641826352517
+			}
+		},
+		"type": "3"
+	}, {
+		"data": {
+			"inputs": {
+				"branches": [{
+					"condition": {
+						"conditions": [{
+							"left": {
+								"input": {
+									"type": "string",
+									"value": {
+										"content": {
+											"blockID": "180379",
+											"name": "output",
+											"source": "block-output"
+										},
+										"type": "ref"
+									}
+								}
+							},
+							"operator": 3,
+							"right": {
+								"input": {
+									"type": "string",
+									"value": {
+										"content": "5",
+										"type": "literal"
+									}
+								}
+							}
+						}],
+						"logic": 2
+					}
+				}]
+			},
+			"nodeMeta": {
+				"description": "连接多个下游分支，若设定的条件成立则仅运行对应的分支，若均不成立则只运行否则分支",
+				"icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Condition-v2.jpg",
+				"mainColor": "#00B2B2",
+				"subTitle": "选择器",
+				"title": "选择器"
+			}
+		},
+		"id": "189553",
+		"meta": {
+			"position": {
+				"x": 1003.4008038127196,
+				"y": -500.14795762394647
+			}
+		},
+		"type": "8"
+	}, {
+		"data": {
+			"inputs": {
+				"inputParameters": [{
+					"input": {
+						"type": "string",
+						"value": {
+							"content": {
+								"blockID": "180379",
+								"name": "output",
+								"source": "block-output"
+							},
+							"type": "ref"
+						}
+					},
+					"name": "output"
+				}],
+				"terminatePlan": "returnVariables"
+			},
+			"nodeMeta": {
+				"description": "工作流的最终节点，用于返回工作流运行后的结果信息",
+				"icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-End-v2.jpg",
+				"subTitle": "",
+				"title": "结束"
+			}
+		},
+		"id": "900001",
+		"meta": {
+			"position": {
+				"x": 1554.125851898408,
+				"y": -184.56641826352518
+			}
+		},
+		"type": "2"
+	}],
+	"edges": [{
+		"sourceNodeID": "100001",
+		"targetNodeID": "163634",
+		"sourcePortID": ""
+	}, {
+		"sourceNodeID": "163634",
+		"targetNodeID": "180379",
+		"sourcePortID": ""
+	}, {
+		"sourceNodeID": "189553",
+		"targetNodeID": "900001",
+		"sourcePortID": "true"
+	}, {
+		"sourceNodeID": "189553",
+		"targetNodeID": "180379",
+		"sourcePortID": "false"
+	}, {
+		"sourceNodeID": "180379",
+		"targetNodeID": "189553",
+		"sourcePortID": ""
+	}],
+	"versions": {
+		"loop": "v2"
+	}
+}
